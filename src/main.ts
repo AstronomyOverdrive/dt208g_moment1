@@ -116,6 +116,35 @@ function displayCourses(): void {
 	}
 }
 
+// Add test data to localStorage
+function addTestData(): void {
+	// Check if url ends in "?test"
+	const urlParts: string[] = decodeURIComponent(location.href).split("?");
+	if (urlParts.length > 1 && urlParts[1] === "test") { // URL includes parameters
+		const storedCourses: string | null = localStorage.getItem("courses");
+		// Add test data if localStorage does not exist
+		if (!storedCourses) {
+			let testArray: Array<CourseInfo> = [];
+			testArray.push({
+				code: "DT207G",
+				name: "Backend-baserad webbutveckling",
+				progression: "B",
+				syllabus: "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT207G/"
+			});
+			testArray.push({
+				code: "DT208G",
+				name: "Programmering i TypeScript",
+				progression: "B",
+				syllabus: "https://www.miun.se/utbildning/kursplaner-och-utbildningsplaner/DT208G/"
+			});
+			const testJSON: string = JSON.stringify(testArray);
+			localStorage.setItem("courses", testJSON);
+			displayCourses();
+		}
+	}
+}
+
 // Event handlers
 addButton.addEventListener("click", addCourse);
 addEventListener("load", displayCourses);
+addEventListener("load", addTestData);
