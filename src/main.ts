@@ -15,7 +15,7 @@ interface CourseInfo {
 }
 
 // Add new course
-function addCourse (): void {
+function addCourse(): void {
 	const newCourse: CourseInfo = {
 		code: courseCodeField.value,
 		name: courseNameField.value,
@@ -23,7 +23,20 @@ function addCourse (): void {
 		syllabus: courseSyllField.value
 	}
 	if (isCourseValid(newCourse)) {
-		//
+		let courseArray: Array<CourseInfo> = [newCourse];
+		const storedCourses: string | null = localStorage.getItem("courses");
+		if (storedCourses) { // Concat with any already saved courses
+			const parsedCourses: Array<CourseInfo> = JSON.parse(storedCourses);
+			courseArray = courseArray.concat(parsedCourses);
+		}
+		// Save courses to localStorage
+		const storeCourses: string = JSON.stringify(courseArray);
+		localStorage.setItem("courses", storeCourses);
+		// Clear form fields
+		courseCodeField.value = "";
+		courseNameField.value = "";
+		courseProgField.value = "";
+		courseSyllField.value = "";
 	}
 }
 
@@ -35,7 +48,7 @@ function isCourseValid(newCourse: CourseInfo): Boolean {
 	if (storedCourses) {
 		const parsedCourses: Array<CourseInfo> = JSON.parse(storedCourses);
 		parsedCourses.forEach(storedCourse => {
-			if (newCourse.code === storedCourse.code) {
+			if (newCourse.code.toLowerCase() === storedCourse.code.toLowerCase()) {
 				problems += `Kurskod ${newCourse.code} finns redan!\n`;
 			}
 		});
