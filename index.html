@@ -10,7 +10,23 @@
 	<body>
 		<header></header>
 
-		<main></main>
+		<main>
+			<form>
+				<fieldset>
+					<legend>Lägg till kurs</legend>
+					<label for="course-code">Kurskod: </label>
+					<input type="text" id="course-code" name="course-code" placeholder="DT000G" required><br>
+					<label for="course-name">Kursnamn: </label>
+					<input type="text" id="course-name" name="course-name" placeholder="Webbutveckling" required><br>
+					<label for="course-prog">Progression: </label>
+					<input type="text" id="course-prog" name="course-prog" placeholder="A" required><br>
+					<label for="course-syll">Kursplan: </label>
+					<input type="text" id="course-syll" name="course-syll" placeholder="https://..." required><br>
+					<button type="button" id="add-btn">Lägg till kurs</button>
+					<div id="info-box"></div>
+				</fieldset>
+			</form>
+		</main>
 
 		<footer></footer>
 		<script type="module" src="/src/main.ts"></script>
