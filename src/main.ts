@@ -50,7 +50,7 @@ function isCourseValid(newCourse: CourseInfo): Boolean {
 	// Check if course code is unique
 	if (storedCourses) {
 		const parsedCourses: Array<CourseInfo> = JSON.parse(storedCourses);
-		parsedCourses.forEach(storedCourse => {
+		parsedCourses.forEach((storedCourse: CourseInfo): void => {
 			if (newCourse.code.toLowerCase() === storedCourse.code.toLowerCase()) {
 				problems += `Kurskod ${newCourse.code} finns redan!\n`;
 			}
@@ -91,7 +91,7 @@ function displayCourses(): void {
 	const storedCourses: string | null = localStorage.getItem("courses");
 	if (storedCourses) { // Check if any courses are stored
 		const parsedCourses: Array<CourseInfo> = JSON.parse(storedCourses);
-		parsedCourses.forEach(storedCourse => {
+		parsedCourses.forEach((storedCourse: CourseInfo): void => {
 			// Add a new row
 			let newRow: HTMLTableRowElement = document.createElement("tr");
 			// Add a course code cell with link to syllabus
